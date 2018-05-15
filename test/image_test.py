@@ -66,7 +66,10 @@ for imagepath in sorted(gt_imdb):
         right = int(bbox[2]) if int(bbox[2]) < image.shape[1] else image.shape[1] - 1
         up = int(bbox[1]) if int(bbox[1]) > 0 else 0
         down = int(bbox[3]) if int(bbox[3]) < image.shape[0] else image.shape[0] - 1
-        line = os.path.basename(imagepath) + ' ' + str(left)+ ' ' + str(right)  + ' ' + str(up)+ ' ' + str(down) + '\n'
+        line = os.path.basename(imagepath) + ' ' + str(left)+ ' ' + str(up)  + ' ' + str(right)+ ' ' + str(down)
+        for coord in landmark:
+            line += (' ' + str(int(coord)) )
+        line += '\n'
         face_txt.write(line)
         blur_size = int(float(right - left) * 0.3) * 2 + 1
         blur[up:down, left:right, :] = cv2.GaussianBlur(blur[up:down, left:right, :], (blur_size, blur_size), 0)
@@ -76,7 +79,6 @@ for imagepath in sorted(gt_imdb):
         maxy = 0
         miny = image.shape[0]
         for i in range(len(landmark)/2):
-            #cv2.circle(image, (int(landmark[2*i]),int(int(landmark[2*i+1]))), 3, (0,0,255))
             maxx = max(landmark[2*i], maxx)
             maxy = max(landmark[2*i+1], maxy)
             minx = min(landmark[2*i], minx)
@@ -114,3 +116,21 @@ for imagepath in sorted(gt_imdb):
     cv2.imshow("masked", masked)
     cv2.waitKey(0)
 face_txt.close()
+
+# A helper function that reads the save faces from file.
+def read_face_from_file():
+    f = open("./output/face.txt")
+    lines = f.readlines()
+    img_dir = './output/'
+    for line in lines:
+        anno = line.split(' ')
+        filename = img_dir + anno[0]
+        bbox = anno[1:5]
+        landmark = anno[5:]
+        img = cv2.imread(filename)
+        cv2.rectangle(img, (int(bbox[0]),int(bbox[1])),(int(bbox[2]),int(bbox[3])),(255,255,255))
+        for i in range(len(landmark)/2):
+            cv2.circle(img, (int(landmark[2*i]),int(int(landmark[2*i+1]))), 3, (0,0,255))
+        cv2.imshow("img", img)
+        cv2.waitKey(0)
+    f.close()
