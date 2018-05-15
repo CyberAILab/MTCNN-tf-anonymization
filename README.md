@@ -18,4 +18,12 @@ Please refer to the [MTCNN-Tensorflow](https://github.com/AITTSMD/MTCNN-Tensorfl
 ![result1.jpg](https://raw.githubusercontent.com/CyberAILab/MTCNN-tf-anonymization/master/result/1.jpg)
 ![result2.jpg](https://raw.githubusercontent.com/CyberAILab/MTCNN-tf-anonymization/master/result/input.jpg)
 ![result3.jpg](https://raw.githubusercontent.com/CyberAILab/MTCNN-tf-anonymization/master/result/mask3.png)
+
+## ROC curve on FDDB
 ![result4.jpg](https://raw.githubusercontent.com/CyberAILab/MTCNN-tf-anonymization/master/result/discROC-compare.png)
+
+## License
+MIT LICENSE
+
+## References
+[MTCNN-Tensorflow](https://github.com/AITTSMD/MTCNN-Tensorflow)
