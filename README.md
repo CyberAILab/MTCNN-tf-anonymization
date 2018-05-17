@@ -27,3 +27,5 @@ MIT LICENSE
 
 ## References
 [MTCNN-Tensorflow](https://github.com/AITTSMD/MTCNN-Tensorflow)
+
+In addition, this project is based on results obtained from a project commissioned by the New Energy and Industrial Technology Development Organization (NEDO).
